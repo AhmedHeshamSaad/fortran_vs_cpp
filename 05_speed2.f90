@@ -16,12 +16,12 @@ program main
 
     call cpu_time(start)
     ! Perform element-wise addition
-    result = array1 + array2
+    result = array1 / 100.D0  + array2**2.D0 + sin(array1 / 100.D0)
     call cpu_time(finish)
 
     elapsed = finish - start
     print *, "Operation took ", elapsed, " seconds."
 
     ! Optionally print some results
-    print *, "Sample result: ", result(n/2, m/2)
+    print *, "Sample result: ", result(n, m)
 end program main

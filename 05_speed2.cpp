@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
+#include <cmath>
 
 using namespace std;
 
@@ -22,7 +23,7 @@ int main() {
     // Perform element-wise addition
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
-            result[i][j] = array1[i][j] + array2[i][j];
+            result[i][j] = array1[i][j] / 100.0 + pow(array2[i][j], 2.0) + sin(array1[i][j] / 100.0);
         }
     }
     auto finish = chrono::high_resolution_clock::now();
@@ -31,7 +32,7 @@ int main() {
     cout << "Operation took " << elapsed.count() << " seconds.\n";
 
     // Optionally print some results
-    cout << "Sample result: " << result[n/2][m/2] << endl;
+    cout << "Sample result: " << result[n-1][m-1] << endl;
 
     return 0;
 }
