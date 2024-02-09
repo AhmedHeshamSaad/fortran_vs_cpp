@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <chrono>
 #include <cmath>
 
@@ -7,11 +6,17 @@ using namespace std;
 
 int main() {
     const int n = 10000, m = 10000;
-    vector<vector<double>> array1(n, vector<double>(m)),
-                                     array2(n, vector<double>(m)),
-                                     result(n, vector<double>(m));
 
-    // Initialize 2D arrays
+    double** array1 = new double*[n];
+    double** array2 = new double*[n];
+    double** result = new double*[n];
+    for (int i = 0; i < n; ++i) {
+        array1[i] = new double[m];
+        array2[i] = new double[m];
+        result[i] = new double[m];
+    }
+
+
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
             array1[i][j] = i + j + 1;
@@ -20,7 +25,7 @@ int main() {
     }
 
     auto start = chrono::high_resolution_clock::now();
-    // Perform element-wise addition
+
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
             result[i][j] = array1[i][j] / 100.0 + pow(array2[i][j], 2.0) + sin(array1[i][j] / 100.0);
@@ -33,6 +38,16 @@ int main() {
 
     // Optionally print some results
     cout << "Sample result: " << result[n-1][m-1] << endl;
+
+    // Deallocate dynamic 2D arrays
+    for (int i = 0; i < n; ++i) {
+        delete[] array1[i];
+        delete[] array2[i];
+        delete[] result[i];
+    }
+    delete[] array1;
+    delete[] array2;
+    delete[] result;
 
     return 0;
 }
